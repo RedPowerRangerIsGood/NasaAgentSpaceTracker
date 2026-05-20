@@ -7,3 +7,10 @@
     then using an LLM + agent to pull from the database, where we make our own api to user to display a space tracker. 
 
 # if a dependency is only used in development then save it as a "development dependency"
+
+# to run express app go to app and run this command
+
+npm start
+
+it should be on localhost port 3000
+http://localhost:3000/
