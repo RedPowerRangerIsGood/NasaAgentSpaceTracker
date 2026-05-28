@@ -9,6 +9,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const { GoogleGenAI } = require('@google/genai');
+
+const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
+const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'global';
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,12 +28,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -37,5 +42,22 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+async function generateContent(projectId = GOOGLE_CLOUD_PROJECT, location = GOOGLE_CLOUD_LOCATION) {
+  const client = new GoogleGenAI({
+    vertexai: true,
+    project: projectId,
+    location: location,
+  });
+
+  const response = await client.models.generateContent({
+    model: 'gemini-3-flash-preview',
+    contents: 'How does AI work?',
+  });
+
+  console.log(response.text);
+
+  return response.text;
+}
 
 module.exports = app;

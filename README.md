@@ -6,11 +6,16 @@
     It solves this issue using an llm to update space mission logs by pulling api data from nasa and putting it into a database, 
     then using an LLM + agent to pull from the database, where we make our own api to user to display a space tracker. 
 
-# if a dependency is only used in development then save it as a "development dependency"
+# if a dependency is only used in development then save it as a "development dependency"(express)
 
-# to run express app go to app and run this command
+# How to run express app, go to backend directory and run this command
 
 npm start
 
-it should be on localhost port 3000
-http://localhost:3000/
+it should be on localhost port XXXX
+http://localhost:XXXX/
+
+
+# How to use run specific node version using the nvmrc file inside the Backend App
+
+nvm use
