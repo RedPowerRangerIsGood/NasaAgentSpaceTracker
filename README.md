@@ -8,14 +8,15 @@
 
 # if a dependency is only used in development then save it as a "development dependency"(express)
 
-# How to run express app, go to backend directory and run this command
+# How to run express app locally, go to BackendExpressApp directory and run this command
 
 npm start
 
 it should be on localhost port XXXX
 http://localhost:XXXX/
 
-
 # How to use run specific node version using the nvmrc file inside the Backend App
 
 nvm use
+
+# To Access html file as deployed domain go to github pages under settings
