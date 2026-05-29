@@ -8,9 +8,13 @@
 
 # if a dependency is only used in development then save it as a "development dependency"(express)
 
+# command to install developer dependency(i.e nodemon for instantly reloading changes to the local server)
+
+npm install <--save-dev> nodemon
+
 # How to run express app, go to backend directory and run this command
 
-npm start
+npm run devstart(uses nodemon command, and loads in environment varaible)
 
 it should be on localhost port XXXX
 http://localhost:XXXX/

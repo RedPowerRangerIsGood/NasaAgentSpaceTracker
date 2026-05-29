@@ -1,18 +1,24 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const cors = require('cors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { env } = require('process');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const MongoClient = require('mongodb').MongoClient;
+
 var app = express();
 
-const { GoogleGenAI } = require('@google/genai');
+app.use(cors());
 
-const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
-const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'global';
+// const { GoogleGenAI } = require('@google/genai');
+
+// const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
+// const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'global';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,21 +49,21 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-async function generateContent(projectId = GOOGLE_CLOUD_PROJECT, location = GOOGLE_CLOUD_LOCATION) {
-  const client = new GoogleGenAI({
-    vertexai: true,
-    project: projectId,
-    location: location,
-  });
+// async function generateContent(projectId = GOOGLE_CLOUD_PROJECT, location = GOOGLE_CLOUD_LOCATION) {
+//   const client = new GoogleGenAI({
+//     vertexai: true,
+//     project: projectId,
+//     location: location,
+//   });
 
-  const response = await client.models.generateContent({
-    model: 'gemini-3-flash-preview',
-    contents: 'How does AI work?',
-  });
+//   const response = await client.models.generateContent({
+//     model: 'gemini-3-flash-preview',
+//     contents: 'How does AI work?',
+//   });
 
-  console.log(response.text);
+//   console.log(response.text);
 
-  return response.text;
-}
+//   return response.text;
+// }
 
 module.exports = app;
